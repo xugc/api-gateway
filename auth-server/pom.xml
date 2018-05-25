@@ -78,11 +78,13 @@
 			</plugin>
 		</plugins>
 		<resources>
-			<directory>src/main/resources</directory>
-			<filtering>true</filtering>
-			<excludes>
-				<exclude>*.sql</exclude>
-			</excludes>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<excludes>
+					<exclude>*.sql</exclude>
+				</excludes>
+			</resource>
 		</resources>
 	</build>
 </project>
