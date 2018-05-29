@@ -1,6 +1,5 @@
 package com.rock.api.gateway.server.security;
 
-
 import java.util.Collection;
 import java.util.Set;
 
@@ -9,6 +8,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 
 /**
@@ -23,9 +23,9 @@ public class RockAccessDecisionManager implements AccessDecisionManager {
 	public void decide(Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes) {
 		if (authentication instanceof OAuth2Authentication) {
 			OAuth2Authentication oauth2Authentication = (OAuth2Authentication) authentication;
-			Set<String> scopes = oauth2Authentication.getOAuth2Request().getScope();// client
-																					// scopes
-			for (ConfigAttribute ca : configAttributes) {// request scopes
+			Set<String> scopes = oauth2Authentication.getOAuth2Request().getScope();// request scopes
+			
+			for (ConfigAttribute ca : configAttributes) {// matched scopes and authorities
 				String requestScope = ca.getAttribute();
 				if (scopes.contains(requestScope))
 					return;
