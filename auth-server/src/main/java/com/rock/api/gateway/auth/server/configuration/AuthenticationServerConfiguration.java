@@ -8,8 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import com.rock.api.gateway.auth.server.security.InMemoryCsrfTokenRepository;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -22,7 +21,7 @@ public class AuthenticationServerConfiguration extends WebSecurityConfigurerAdap
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().ignoringAntMatchers("/login").csrfTokenRepository(new InMemoryCsrfTokenRepository()).and()
+		http.csrf().ignoringAntMatchers("/login").csrfTokenRepository(new HttpSessionCsrfTokenRepository()).and()
 				.formLogin().loginPage("/login.html").loginProcessingUrl("/login").permitAll()
 				.failureUrl("/login.html?error").and().authorizeRequests().anyRequest().authenticated();
 	}
