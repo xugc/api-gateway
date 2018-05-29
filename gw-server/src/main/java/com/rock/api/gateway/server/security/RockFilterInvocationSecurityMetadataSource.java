@@ -1,4 +1,4 @@
-package com.rock.api.gateway.server.auth;
+package com.rock.api.gateway.server.security;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -18,7 +18,7 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
  * @date 2017年11月29日 下午7:35:15
  * 
  */
-public class DefaultFilterInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
+public class RockFilterInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
 	private static final Map<RequestMatcher, Collection<ConfigAttribute>> authMap = new HashMap<>();
 

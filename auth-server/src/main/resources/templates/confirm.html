@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>授权</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	你好,
+	<span th:text="${appName}"></span>
+	:
+	<form action="authorize" method="post">
+		<input type="hidden" value="true" name="user_oauth_approval" />
+		<input type="hidden" th:value="${_csrf.token}" th:name="${_csrf.parameterName}" />
+		授权信息:
+		<ul th:each="auth:${scopes}">
+			<li th:if="${auth.value}">
+				<span th:text="${auth.key}"></span>
+				<input type="radio" th:name="${auth.key}" checked="checked" value="true" />同意
+				<input type="radio" th:name="${auth.key}" value="false" />拒绝
+			</li>
+			<li th:if="!${auth.value}">
+				<span th:text="${auth.key}"></span>
+				<input type="radio" th:name="${auth.key}" value="true" />同意
+				<input type="radio" th:name="${auth.key}" checked="checked" value="false" />拒绝
+			</li>
+		</ul>
+		<input type="submit" value="授权" />
+	</form>
+</body>
+</html>

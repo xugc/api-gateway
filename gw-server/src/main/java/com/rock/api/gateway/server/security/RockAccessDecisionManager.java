@@ -1,4 +1,5 @@
-package com.rock.api.gateway.server.auth;
+package com.rock.api.gateway.server.security;
+
 
 import java.util.Collection;
 import java.util.Set;
@@ -16,7 +17,7 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
  * @date 2017年11月29日 下午7:37:22
  * 
  */
-public class DefaultAccessDecisionManager implements AccessDecisionManager {
+public class RockAccessDecisionManager implements AccessDecisionManager {
 
 	@Override
 	public void decide(Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes) {
