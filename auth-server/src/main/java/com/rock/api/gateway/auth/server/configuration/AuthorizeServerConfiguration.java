@@ -18,6 +18,8 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.approval.JdbcApprovalStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
+import com.rock.api.gateway.auth.server.filter.ClientAuthenticationTokenEndpointFilter;
+
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizeServerConfiguration extends AuthorizationServerConfigurerAdapter {
@@ -30,7 +32,8 @@ public class AuthorizeServerConfiguration extends AuthorizationServerConfigurerA
 
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-		security.passwordEncoder(new BCryptPasswordEncoder()).allowFormAuthenticationForClients();
+		security.passwordEncoder(new BCryptPasswordEncoder());
+		security.addTokenEndpointAuthenticationFilter(new ClientAuthenticationTokenEndpointFilter());
 	}
 
 	@Override
